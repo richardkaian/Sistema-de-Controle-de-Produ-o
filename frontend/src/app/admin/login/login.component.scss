@@ -1,0 +1,85 @@
+.pagina-login {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cor-fundo);
+}
+
+.cartao-login {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 2.5rem;
+  background: var(--cor-fundo-painel);
+  border: 1px solid var(--cor-linha-blueprint);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(28, 36, 48, 0.06);
+
+  .rotulo {
+    margin: 0;
+    font-family: var(--fonte-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cor-texto-fraco);
+  }
+
+  h1 {
+    margin: 0 0 0.5rem;
+    font-family: var(--fonte-display);
+    font-weight: 500;
+    font-size: 1.7rem;
+    color: var(--cor-texto);
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-family: var(--fonte-mono);
+    font-size: 0.8rem;
+    color: var(--cor-texto-fraco);
+  }
+
+  input {
+    background: var(--cor-fundo);
+    border: 1px solid var(--cor-linha-blueprint);
+    border-radius: 6px;
+    padding: 0.65rem 0.8rem;
+    color: var(--cor-texto);
+    font-family: var(--fonte-mono);
+    font-size: 0.95rem;
+
+    &:focus {
+      outline: none;
+      border-color: var(--cor-cobre-claro);
+    }
+  }
+
+  .erro {
+    margin: 0;
+    color: var(--cor-erro);
+    font-family: var(--fonte-mono);
+    font-size: 0.85rem;
+  }
+
+  button {
+    margin-top: 0.4rem;
+    padding: 0.75rem;
+    background: var(--cor-cobre);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-family: var(--fonte-mono);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover:not(:disabled) { background: var(--cor-cobre-claro); }
+    &:disabled { opacity: 0.6; cursor: default; }
+  }
+}

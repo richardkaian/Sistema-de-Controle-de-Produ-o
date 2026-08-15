@@ -1,0 +1,76 @@
+<div class="pagina-os">
+  <header class="cabecalho-pagina">
+    <h1>Ordens de Serviço</h1>
+    <p class="subtitulo">{{ ordens().length }} OS no sistema</p>
+  </header>
+
+  @if (carregando()) {
+    <p class="carregando">Carregando…</p>
+  } @else {
+    <table class="tabela-os">
+      <thead>
+        <tr>
+          <th>OS</th>
+          <th>Cliente</th>
+          <th>Vendedor</th>
+          <th>Pedido</th>
+          <th>Limite usinagem</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (os of ordens(); track os.id) {
+          <tr class="linha-os" (click)="alternarDetalhe(os.numero_os)">
+            <td class="numero-os">{{ os.numero_os }}</td>
+            <td>{{ os.cliente }}</td>
+            <td>{{ os.vendedor || '—' }}</td>
+            <td>{{ os.data_pedido || '—' }}</td>
+            <td>{{ os.data_limite_usinagem || '—' }}</td>
+            <td>
+              <select
+                class="badge-status seletor-status"
+                [class]="'status-' + os.status"
+                [value]="os.status"
+                [disabled]="atualizandoStatus() === os.numero_os"
+                (click)="$event.stopPropagation()"
+                (change)="mudarStatus(os.numero_os, $any($event.target).value, $event)"
+              >
+                @for (s of statusesValidos; track s) {
+                  <option [value]="s">{{ s }}</option>
+                }
+              </select>
+            </td>
+          </tr>
+
+          @if (osExpandida()?.numero_os === os.numero_os) {
+            <tr class="linha-detalhe">
+              <td colspan="6">
+                @if (carregandoDetalhe()) {
+                  <p class="carregando">Carregando itens…</p>
+                } @else {
+                  @if (osExpandida(); as detalhe) {
+                    <div class="itens-os">
+                      @for (item of detalhe.itens; track item.id) {
+                        <div class="item-detalhe">
+                          <p class="item-descricao">{{ item.qtd }}x {{ item.descricao }}</p>
+                          @if (item.tempo_por_item) {
+                            <p class="item-info">{{ item.tempo_por_item }}h por item</p>
+                          }
+                          @if (item.observacoes) {
+                            <p class="item-obs">{{ item.observacoes }}</p>
+                          }
+                        </div>
+                      }
+                    </div>
+                  }
+                }
+              </td>
+            </tr>
+          }
+        } @empty {
+          <tr><td colspan="6" class="coluna-vazia">Nenhuma OS no sistema ainda.</td></tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

@@ -1,0 +1,97 @@
+<div class="pagina-crachas">
+  <header class="cabecalho-pagina">
+    <div>
+      <h1>Crachás</h1>
+      <p class="subtitulo">{{ funcionarios().length }} cadastrados</p>
+    </div>
+    @if (!formularioAberto()) {
+      <button class="botao-primario" (click)="abrirFormulario()">+ Novo crachá</button>
+    }
+  </header>
+
+  @if (formularioAberto()) {
+    <form class="formulario-cracha" (ngSubmit)="salvarNovoFuncionario()">
+      <div class="linha-form">
+        <label>
+          Código do crachá
+          <input type="text" name="codigo" [(ngModel)]="novoCodigoCracha" placeholder="FUNC-0003" required />
+        </label>
+
+        <label>
+          Nome
+          <input type="text" name="nome" [(ngModel)]="novoNome" required />
+        </label>
+      </div>
+
+      <div class="linha-form">
+        <label>
+          Cargo
+          <input type="text" name="cargo" [(ngModel)]="novoCargo" placeholder="Operador de Corte" />
+        </label>
+
+        <label>
+          Tipo de acesso
+          <select name="role" [(ngModel)]="novoRole">
+            <option value="operador">Operador (bipagem)</option>
+            <option value="admin">Admin (painel)</option>
+          </select>
+        </label>
+      </div>
+
+      @if (novoRole === 'admin') {
+        <label>
+          Senha de acesso ao painel
+          <input type="password" name="senha" [(ngModel)]="novaSenha" required />
+        </label>
+      }
+
+      @if (erro(); as msg) {
+        <p class="erro-form">{{ msg }}</p>
+      }
+
+      <div class="acoes-form">
+        <button type="button" class="botao-secundario" (click)="cancelarFormulario()">Cancelar</button>
+        <button type="submit" class="botao-primario" [disabled]="salvando()">
+          {{ salvando() ? 'Salvando…' : 'Salvar' }}
+        </button>
+      </div>
+    </form>
+  }
+
+  @if (carregando()) {
+    <p class="carregando">Carregando…</p>
+  } @else {
+    <table class="tabela-crachas">
+      <thead>
+        <tr>
+          <th>Crachá</th>
+          <th>Nome</th>
+          <th>Cargo</th>
+          <th>Acesso</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (f of funcionarios(); track f.id) {
+          <tr>
+            <td class="codigo-cracha">{{ f.codigo_cracha }}</td>
+            <td>{{ f.nome }}</td>
+            <td>{{ f.cargo || '—' }}</td>
+            <td><span class="badge-role" [class.admin]="f.role === 'admin'">{{ f.role }}</span></td>
+            <td>
+              <span class="badge-ativo" [class.inativo]="!f.ativo">
+                {{ f.ativo ? 'Ativo' : 'Inativo' }}
+              </span>
+            </td>
+            <td>
+              <button class="botao-secundario botao-pequeno" (click)="alternarAtivo(f)">
+                {{ f.ativo ? 'Desativar' : 'Ativar' }}
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

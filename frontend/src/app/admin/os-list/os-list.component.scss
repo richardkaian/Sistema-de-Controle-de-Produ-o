@@ -1,0 +1,110 @@
+.cabecalho-pagina {
+  margin-bottom: 2rem;
+
+  h1 {
+    margin: 0;
+    font-family: var(--fonte-display);
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--cor-texto);
+  }
+
+  .subtitulo {
+    margin: 0.25rem 0 0;
+    font-family: var(--fonte-mono);
+    font-size: 0.85rem;
+    color: var(--cor-texto-fraco);
+  }
+}
+
+.carregando, .coluna-vazia {
+  font-family: var(--fonte-mono);
+  color: var(--cor-texto-fraco);
+}
+
+.tabela-os {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+
+  th {
+    text-align: left;
+    padding: 0.7rem 0.9rem;
+    color: var(--cor-texto-fraco);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--cor-linha-blueprint);
+  }
+
+  td {
+    padding: 0.75rem 0.9rem;
+    color: var(--cor-texto);
+    border-bottom: 1px solid var(--cor-linha-blueprint);
+  }
+
+  .numero-os { font-weight: 500; color: var(--cor-cobre-claro); }
+
+  .linha-os {
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &:hover { background: var(--cor-hover); }
+  }
+}
+
+.badge-status {
+  background: var(--cor-azul-fraca);
+  color: var(--cor-cobre-claro);
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.seletor-status {
+  border: none;
+  cursor: pointer;
+  font-family: var(--fonte-mono);
+  appearance: none;
+  -webkit-appearance: none;
+
+  &:disabled { opacity: 0.6; cursor: default; }
+  &:focus { outline: 2px solid var(--cor-cobre-claro); outline-offset: 1px; }
+
+  &.status-aguardando { background: var(--cor-fundo); color: var(--cor-texto-fraco); }
+  &.status-concluido { background: var(--cor-sucesso-fraca); color: var(--cor-sucesso); }
+}
+
+.linha-detalhe td {
+  background: var(--cor-fundo-painel);
+}
+
+.itens-os {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+}
+
+.item-detalhe {
+  .item-descricao {
+    margin: 0;
+    color: var(--cor-texto);
+  }
+
+  .item-info {
+    margin: 0.15rem 0 0;
+    color: var(--cor-texto-fraco);
+    font-size: 0.78rem;
+  }
+
+  .item-obs {
+    margin: 0.15rem 0 0;
+    color: var(--cor-cobre-claro);
+    font-size: 0.78rem;
+  }
+}

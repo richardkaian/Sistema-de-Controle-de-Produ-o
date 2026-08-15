@@ -1,0 +1,94 @@
+<div class="tela" (click)="focarLeitor()">
+  @if (!etapaEstacao()) {
+    <!-- Primeira vez nesta máquina (ou depois de "Trocar estação"): escolhe
+         a etapa uma vez e fica salva no navegador deste PC dali em diante. -->
+    <div class="tela-setup-etapa">
+      <p class="rotulo-setup">OBR · Controle de Produção</p>
+      <p class="titulo-setup">Qual etapa esta estação vai controlar?</p>
+      <div class="opcoes-etapa">
+        @for (opcao of etapasDisponiveis; track opcao.valor) {
+          <button class="botao-etapa" (click)="escolherEtapa(opcao.valor)">{{ opcao.rotulo }}</button>
+        }
+      </div>
+    </div>
+  } @else {
+  <!-- Input sempre focado: é nele que o leitor de código de barras "digita".
+       Fica visualmente escondido, mas continua funcional (não é display:none,
+       senão não recebe foco/teclado em alguns navegadores). -->
+  <input
+    #leitor
+    class="leitor-oculto"
+    type="text"
+    [(ngModel)]="valorLeitura"
+    (keyup.enter)="processarLeitura()"
+    (blur)="focarLeitor()"
+    autocomplete="off"
+    spellcheck="false"
+  />
+
+  <header class="cabecalho">
+    <h1>OBR · Controle de Produção</h1>
+    <div class="status-conexao" [class.online]="conectado()" [class.offline]="!conectado()">
+      <span class="ponto"></span>
+      {{ conectado() ? 'Conectado' : 'Sem conexão' }}
+    </div>
+    <span class="etapa-badge" (click)="trocarEstacao(); $event.stopPropagation()" title="Toque pra trocar a etapa desta estação">
+      {{ etapaLabel }}
+    </span>
+  </header>
+
+  <main class="conteudo">
+    @if (!operador()) {
+      <div class="estado-vazio">
+        <div class="reticula" [class.pulsando]="!carregando()">
+          <span class="canto canto-tl"></span>
+          <span class="canto canto-tr"></span>
+          <span class="canto canto-bl"></span>
+          <span class="canto canto-br"></span>
+          <span class="icone">🪪</span>
+        </div>
+        <p class="titulo-grande">Bipe seu crachá pra começar</p>
+      </div>
+    } @else {
+      <div class="operador-ativo">
+        <p class="rotulo">Operador</p>
+        <p class="nome-operador">{{ operador()!.nome }}</p>
+        @if (operador()!.cargo) {
+          <p class="cargo-operador">{{ operador()!.cargo }}</p>
+        }
+      </div>
+
+      <div class="area-scan">
+        <div class="reticula" [class.pulsando]="!carregando()">
+          <span class="canto canto-tl"></span>
+          <span class="canto canto-tr"></span>
+          <span class="canto canto-bl"></span>
+          <span class="canto canto-br"></span>
+          <span class="icone">📦</span>
+        </div>
+        <p class="titulo-grande">Bipe a OS</p>
+        <p class="subtitulo">Etapa: {{ etapaLabel }}</p>
+      </div>
+
+      @if (ultimoResultado(); as resultado) {
+        <div class="ultimo-registro">
+          Última leitura: OS {{ resultado.os.numero_os }} —
+          {{ resultado.tipo_evento === 'inicio' ? 'Início' : 'Fim' }}
+        </div>
+      }
+
+      <button class="botao-trocar" (click)="trocarOperador()">Trocar operador</button>
+    }
+
+    @if (carregando()) {
+      <p class="carregando">Processando leitura…</p>
+    }
+  </main>
+
+  @if (mensagem(); as msg) {
+    <div class="banner-mensagem" [class.sucesso]="msg.tipo === 'sucesso'" [class.erro]="msg.tipo === 'erro'">
+      {{ msg.texto }}
+    </div>
+  }
+  }
+</div>

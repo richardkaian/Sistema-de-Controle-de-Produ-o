@@ -1,0 +1,154 @@
+.cabecalho-pagina {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  h1 {
+    margin: 0;
+    font-family: var(--fonte-display);
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--cor-texto);
+  }
+
+  .subtitulo {
+    margin: 0.25rem 0 0;
+    font-family: var(--fonte-mono);
+    font-size: 0.85rem;
+    color: var(--cor-texto-fraco);
+  }
+}
+
+.carregando { font-family: var(--fonte-mono); color: var(--cor-texto-fraco); }
+
+.botao-primario {
+  background: var(--cor-cobre);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.1rem;
+  font-family: var(--fonte-mono);
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover:not(:disabled) { background: var(--cor-cobre-claro); }
+  &:disabled { opacity: 0.6; cursor: default; }
+}
+
+.botao-secundario {
+  background: transparent;
+  border: 1px solid var(--cor-texto-fraco);
+  color: var(--cor-texto-fraco);
+  border-radius: 6px;
+  padding: 0.6rem 1.1rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+
+  &:hover { color: var(--cor-texto); border-color: var(--cor-texto); }
+}
+
+.botao-pequeno { padding: 0.35rem 0.7rem; font-size: 0.75rem; }
+
+.formulario-cracha {
+  background: var(--cor-fundo-painel);
+  border: 1px solid var(--cor-linha-blueprint);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.linha-form {
+  display: flex;
+  gap: 1rem;
+
+  label { flex: 1; }
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  color: var(--cor-texto-fraco);
+}
+
+input, select {
+  background: var(--cor-fundo);
+  border: 1px solid var(--cor-linha-blueprint);
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  color: var(--cor-texto);
+  font-family: var(--fonte-mono);
+  font-size: 0.9rem;
+
+  &:focus { outline: none; border-color: var(--cor-cobre-claro); }
+}
+
+.erro-form {
+  margin: 0;
+  color: var(--cor-erro);
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+}
+
+.acoes-form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.tabela-crachas {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+
+  th {
+    text-align: left;
+    padding: 0.7rem 0.9rem;
+    color: var(--cor-texto-fraco);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--cor-linha-blueprint);
+  }
+
+  td {
+    padding: 0.75rem 0.9rem;
+    color: var(--cor-texto);
+    border-bottom: 1px solid var(--cor-linha-blueprint);
+  }
+
+  .codigo-cracha { font-weight: 500; color: var(--cor-cobre-claro); }
+}
+
+.badge-role, .badge-ativo {
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-role {
+  background: var(--cor-fundo);
+  color: var(--cor-texto-fraco);
+
+  &.admin { background: var(--cor-azul-fraca); color: var(--cor-cobre-claro); }
+}
+
+.badge-ativo {
+  background: var(--cor-sucesso-fraca);
+  color: var(--cor-sucesso);
+
+  &.inativo { background: var(--cor-erro-fraca); color: var(--cor-erro); }
+}

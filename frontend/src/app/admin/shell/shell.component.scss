@@ -1,0 +1,98 @@
+.admin-shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: var(--cor-fundo);
+}
+
+.barra-lateral {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--cor-fundo-painel);
+  border-right: 1px solid var(--cor-linha-blueprint);
+  padding: 1.75rem 1.25rem;
+
+  .marca {
+    margin-bottom: 2.5rem;
+
+    .rotulo {
+      margin: 0;
+      font-family: var(--fonte-display);
+      font-weight: 500;
+      font-size: 1.4rem;
+      color: var(--cor-cobre-claro);
+    }
+
+    .subtitulo {
+      margin: 0.15rem 0 0;
+      font-family: var(--fonte-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--cor-texto-fraco);
+    }
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    a {
+      font-family: var(--fonte-mono);
+      font-size: 0.9rem;
+      color: var(--cor-texto-fraco);
+      text-decoration: none;
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+
+      &:hover { color: var(--cor-texto); background: var(--cor-hover); }
+      &.ativo { color: #ffffff; background: var(--cor-cobre-claro); font-weight: 500; }
+    }
+  }
+
+  .rodape-lateral {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    .admin-nome {
+      margin: 0;
+      font-family: var(--fonte-mono);
+      font-size: 0.8rem;
+      color: var(--cor-texto-fraco);
+    }
+
+    .link-trocar-senha {
+      font-family: var(--fonte-mono);
+      font-size: 0.8rem;
+      color: var(--cor-texto-fraco);
+      text-decoration: none;
+
+      &:hover, &.ativo { color: var(--cor-cobre-claro); }
+    }
+
+    .botao-sair {
+      background: transparent;
+      border: 1px solid var(--cor-texto-fraco);
+      color: var(--cor-texto-fraco);
+      border-radius: 6px;
+      padding: 0.5rem;
+      font-family: var(--fonte-mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+
+      &:hover { color: var(--cor-texto); border-color: var(--cor-texto); }
+    }
+  }
+}
+
+.conteudo-admin {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2.5rem 3rem;
+}

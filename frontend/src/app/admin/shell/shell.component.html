@@ -1,0 +1,27 @@
+<div class="admin-shell">
+  <aside class="barra-lateral">
+    <div class="marca">
+      <p class="rotulo">OBR</p>
+      <p class="subtitulo">Controle de Produção</p>
+    </div>
+
+    <nav>
+      <a routerLink="/admin/dashboard" routerLinkActive="ativo">Dashboard</a>
+      <a routerLink="/admin/programacao" routerLinkActive="ativo">Programação</a>
+      <a routerLink="/admin/os" routerLinkActive="ativo">Ordens de Serviço</a>
+      <a routerLink="/admin/crachas" routerLinkActive="ativo">Crachás</a>
+    </nav>
+
+    <div class="rodape-lateral">
+      @if (admin(); as a) {
+        <p class="admin-nome">{{ a.nome }}</p>
+      }
+      <a routerLink="/admin/trocar-senha" routerLinkActive="ativo" class="link-trocar-senha">Trocar senha</a>
+      <button class="botao-sair" (click)="sair()">Sair</button>
+    </div>
+  </aside>
+
+  <main class="conteudo-admin">
+    <router-outlet></router-outlet>
+  </main>
+</div>

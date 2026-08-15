@@ -1,0 +1,84 @@
+<div class="pagina-programacao">
+  <header class="cabecalho-pagina">
+    <h1>Programação de Pedidos</h1>
+    <p class="subtitulo">
+      Arraste pra reordenar a fila de usinagem.
+      @if (salvandoOrdem()) { <span class="salvando">salvando…</span> }
+    </p>
+  </header>
+
+  @if (carregando()) {
+    <p class="carregando">Carregando…</p>
+  } @else {
+    <div class="colunas-programacao">
+      <section class="coluna-fila">
+        <h2>Fila de usinagem <span class="contagem">{{ fila().length }}</span></h2>
+
+        <div
+          class="lista-fila"
+          cdkDropList
+          [cdkDropListData]="fila()"
+          (cdkDropListDropped)="arrastarNaFila($event)"
+        >
+          @for (os of fila(); track os.numero_os; let i = $index) {
+            <div class="cartao-fila" cdkDrag>
+              <span class="posicao">{{ i + 1 }}</span>
+
+              <div class="corpo-cartao">
+                <p class="numero-os">{{ os.numero_os }} <span class="cliente">— {{ os.cliente }}</span></p>
+                <div class="parametros">
+                  <span class="parametro">
+                    ⏱ {{ os.tempo_usinagem_total ? os.tempo_usinagem_total + 'h' : 'tempo não informado' }}
+                  </span>
+                  <span class="parametro">
+                    📅 {{ os.data_limite_usinagem ? ('entrega ' + os.data_limite_usinagem) : 'sem prazo definido' }}
+                  </span>
+                  <span class="badge-status">{{ os.status }}</span>
+                </div>
+              </div>
+
+              <button
+                class="botao-remover"
+                title="Tirar da fila"
+                [disabled]="atualizandoOs() === os.numero_os"
+                (click)="remover(os.numero_os)"
+              >✕</button>
+            </div>
+          } @empty {
+            <p class="coluna-vazia">Nenhuma OS na fila ainda. Adicione uma da lista ao lado.</p>
+          }
+        </div>
+      </section>
+
+      <section class="coluna-disponiveis">
+        <h2>Disponíveis pra adicionar <span class="contagem">{{ disponiveis().length }}</span></h2>
+
+        <div class="lista-disponiveis">
+          @for (os of disponiveis(); track os.numero_os) {
+            <div class="cartao-disponivel">
+              <div class="corpo-cartao">
+                <p class="numero-os">{{ os.numero_os }} <span class="cliente">— {{ os.cliente }}</span></p>
+                <div class="parametros">
+                  <span class="parametro">
+                    ⏱ {{ os.tempo_usinagem_total ? os.tempo_usinagem_total + 'h' : 'tempo não informado' }}
+                  </span>
+                  <span class="parametro">
+                    📅 {{ os.data_limite_usinagem ? ('entrega ' + os.data_limite_usinagem) : 'sem prazo definido' }}
+                  </span>
+                </div>
+              </div>
+
+              <button
+                class="botao-adicionar"
+                [disabled]="atualizandoOs() === os.numero_os"
+                (click)="adicionar(os.numero_os)"
+              >+ Adicionar</button>
+            </div>
+          } @empty {
+            <p class="coluna-vazia">Nada por aqui — todas as OS pendentes já estão na fila.</p>
+          }
+        </div>
+      </section>
+    </div>
+  }
+</div>

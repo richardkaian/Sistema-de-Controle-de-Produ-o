@@ -1,0 +1,53 @@
+<div class="dashboard">
+  <header class="cabecalho-pagina">
+    <h1>Dashboard</h1>
+    <p class="subtitulo">Status das ordens de serviço em tempo real</p>
+  </header>
+
+  @if (carregando()) {
+    <p class="carregando">Carregando…</p>
+  } @else {
+    <div class="quadro-kanban">
+      @for (status of statuses; track status) {
+        <div class="coluna">
+          <div class="coluna-cabecalho">
+            <span>{{ statusLabel[status] }}</span>
+            <span class="contagem">{{ ordensPorStatus()[status].length }}</span>
+          </div>
+
+          <div class="coluna-corpo">
+            @for (os of ordensPorStatus()[status]; track os.id) {
+              <div class="cartao-os">
+                <p class="numero-os">OS {{ os.numero_os }}</p>
+                <p class="cliente-os">{{ os.cliente }}</p>
+                @if (os.tempo_usinagem_total) {
+                  <p class="tempo-os">{{ os.tempo_usinagem_total }}h de usinagem</p>
+                }
+              </div>
+            } @empty {
+              <p class="coluna-vazia">—</p>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <section class="feed-eventos">
+    <h2>Últimas bipagens</h2>
+    <div class="lista-eventos">
+      @for (evento of eventos(); track evento.id) {
+        <div class="item-evento" [class.fim]="evento.tipo_evento === 'fim'">
+          <span class="etapa-evento">{{ etapaLabel[evento.etapa] }}</span>
+          <span class="acao-evento">{{ evento.tipo_evento === 'inicio' ? 'início' : 'fim' }}</span>
+          <span class="os-evento">OS {{ evento.numero_os }}</span>
+          <span class="cliente-evento">{{ evento.cliente }}</span>
+          <span class="operador-evento">{{ evento.funcionario_nome }}</span>
+          <span class="hora-evento">{{ evento.criado_em }}</span>
+        </div>
+      } @empty {
+        <p class="coluna-vazia">Nenhuma bipagem registrada ainda.</p>
+      }
+    </div>
+  </section>
+</div>

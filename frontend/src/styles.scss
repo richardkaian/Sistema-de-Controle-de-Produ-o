@@ -1,0 +1,40 @@
+/* styles.scss — tokens globais */
+:root {
+  /* paleta — painel claro industrial: fundo cinza-azulado, cartões
+     brancos, acento azul. Pensado pra ficar legível em galpão iluminado. */
+  --cor-fundo: #eef1f5;
+  --cor-fundo-painel: #ffffff;
+  --cor-linha-blueprint: #dbe0e6; /* nome mantido por compatibilidade — agora é a borda padrão */
+  --cor-texto: #1c2430;
+  --cor-texto-fraco: #5a6472;
+  --cor-cobre: #1f6fd6; /* nome mantido por compatibilidade — agora é o acento azul */
+  --cor-cobre-claro: #1560bd;
+  --cor-sucesso: #1a7a4c;
+  --cor-sucesso-fraca: #e0f5e8;
+  --cor-erro: #c0392b;
+  --cor-erro-fraca: #fbe6e3;
+  --cor-azul-fraca: #e7f0fc;
+  --cor-hover: rgba(31, 111, 214, 0.06);
+
+  /* fontes de sistema — nada de CDN externo. Um kiosk de fábrica não pode
+     depender de internet só pra desenhar a tela. */
+  --fonte-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --fonte-mono: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte-mono);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow: hidden; /* tela de kiosk, sem scroll acidental */
+}

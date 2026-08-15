@@ -1,0 +1,24 @@
+<div class="pagina-login">
+  <form class="cartao-login" (ngSubmit)="entrar()">
+    <p class="rotulo">OBR · Controle de Produção</p>
+    <h1>Área administrativa</h1>
+
+    <label>
+      Crachá
+      <input type="text" name="cracha" [(ngModel)]="codigoCracha" autocomplete="off" autofocus />
+    </label>
+
+    <label>
+      Senha
+      <input type="password" name="senha" [(ngModel)]="senha" autocomplete="off" />
+    </label>
+
+    @if (erro(); as msg) {
+      <p class="erro">{{ msg }}</p>
+    }
+
+    <button type="submit" [disabled]="carregando()">
+      {{ carregando() ? 'Entrando…' : 'Entrar' }}
+    </button>
+  </form>
+</div>

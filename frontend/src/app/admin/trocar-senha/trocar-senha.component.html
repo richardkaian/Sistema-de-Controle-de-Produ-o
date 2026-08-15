@@ -1,0 +1,35 @@
+<div class="cabecalho-pagina">
+  <h1>Trocar senha</h1>
+  <p class="subtitulo">Atualize a senha de acesso à área administrativa.</p>
+</div>
+
+<form class="formulario-senha" (ngSubmit)="salvar()">
+  <label>
+    Senha atual
+    <input type="password" name="senhaAtual" [(ngModel)]="senhaAtual" autocomplete="off" />
+  </label>
+
+  <label>
+    Senha nova
+    <input type="password" name="senhaNova" [(ngModel)]="senhaNova" autocomplete="off" />
+  </label>
+
+  <label>
+    Confirmar senha nova
+    <input type="password" name="confirmarSenhaNova" [(ngModel)]="confirmarSenhaNova" autocomplete="off" />
+  </label>
+
+  @if (erro(); as msg) {
+    <p class="erro-form">{{ msg }}</p>
+  }
+
+  @if (sucesso()) {
+    <p class="sucesso-form">Senha atualizada com sucesso.</p>
+  }
+
+  <div class="acoes-form">
+    <button type="submit" class="botao-primario" [disabled]="carregando()">
+      {{ carregando() ? 'Salvando…' : 'Salvar nova senha' }}
+    </button>
+  </div>
+</form>
