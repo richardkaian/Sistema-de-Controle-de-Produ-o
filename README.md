@@ -55,6 +55,3 @@ Cada pasta tem seu próprio `.gitignore`. Regra geral:
 - `backend/public/` — build do Angular copiado pra lá pelo `npm run deploy`;
   é gerado a partir de `frontend/`, reconstrói quando precisar
 - `frontend/dist/`, `frontend/.angular/` — build e cache do Angular
-
-Isso mantém o repositório só com código-fonte — sem banco de dados, sem
-PDFs de OS reais, sem builds gerados.
