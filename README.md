@@ -1,4 +1,4 @@
-# Pedidos Fábrica — OBR
+# Pedidos Fábrica
 
 Sistema de controle de produção da fábrica: bipagem de crachá + OS nas
 estações (Separação, Corte, Usinagem, Expedição) e painel admin (kanban,
