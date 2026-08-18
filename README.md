@@ -36,22 +36,3 @@ npm run migrate   # cria o banco (1ª vez só)
 npm run deploy     # builda o Angular e copia pra backend/public/
 npm start          # sobe tudo na porta 3000
 ```
-
-## O que vai pro Git e o que não vai
-
-Cada pasta tem seu próprio `.gitignore`. Regra geral:
-
-**Vai (código-fonte):**
-- Todo o `.ts`, `.html`, `.scss` do frontend
-- Todo o `.js` do backend, `schema.sql`, `package.json`
-- `package-lock.json` (trava as versões exatas das dependências)
-
-**Não vai (gerado ou específico do ambiente):**
-- `node_modules/` (backend e frontend) — recriado com `npm install`
-- `backend/data/` — o banco SQLite (`.db`) de cada instalação é local, tem
-  dados reais da fábrica, nunca é código
-- `backend/pedidos-recebidos/` — pasta que o watcher monitora, se enche de
-  PDFs reais das OS
-- `backend/public/` — build do Angular copiado pra lá pelo `npm run deploy`;
-  é gerado a partir de `frontend/`, reconstrói quando precisar
-- `frontend/dist/`, `frontend/.angular/` — build e cache do Angular
